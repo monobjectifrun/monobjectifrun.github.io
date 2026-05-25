@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Connexion Strava — Mon Objectif Run</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+           background: #FAFAFA; color: #1A1A1A; margin: 0;
+           min-height: 100vh; display: flex; align-items: center; justify-content: center;
+           text-align: center; padding: 24px; }
+    .box { max-width: 360px; }
+    h1 { font-size: 20px; margin: 0 0 8px; }
+    p { margin: 4px 0; color: #555; font-size: 15px; }
+    a.btn { display: inline-block; margin-top: 16px; padding: 12px 20px;
+            background: #FC4C02; color: #fff; text-decoration: none;
+            border-radius: 10px; font-weight: 600; }
+    code { background: #f0f0f0; padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>Retour vers Mon Objectif Run…</h1>
+    <p id="msg">Connexion Strava reçue, ouverture de l’app…</p>
+    <a id="manual" class="btn" href="#" style="display:none">Ouvrir l’application</a>
+    <p id="hint" style="margin-top:24px;display:none">
+      L’app ne s’est pas ouverte ? Vérifie qu’elle est bien installée puis touche le bouton ci-dessus.
+    </p>
+  </div>
+
+  <script>
+    (function () {
+      var qs = window.location.search || '';
+      var target = 'monobjectifrun://strava' + qs;
+      var manual = document.getElementById('manual');
+      manual.href = target;
+
+      try { window.location.replace(target); } catch (e) {}
+
+      setTimeout(function () {
+        document.getElementById('msg').textContent =
+          'Si l’app ne s’ouvre pas automatiquement :';
+        manual.style.display = 'inline-block';
+        document.getElementById('hint').style.display = 'block';
+      }, 1200);
+    })();
+  </script>
+</body>
+</html>
